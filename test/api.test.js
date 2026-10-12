@@ -64,3 +64,13 @@ test("unknown round ids return 404", () =>
     assert.equal((await call("GET", "/api/rounds/not-a-real-id")).status, 404);
     assert.equal((await call("GET", "/api/rounds/00000000-0000-0000-0000-000000000000")).status, 404);
   }));
+
+test("the player list covers every list and includes nicknames", () =>
+  withServer(async (call) => {
+    const { status, body } = await call("GET", "/api/players");
+    assert.equal(status, 200);
+    assert.ok(body.players.includes("Gail Goodrich"));
+    assert.ok(body.players.includes("Victor Wembanyama"));
+    assert.equal(new Set(body.players).size, body.players.length);
+    assert.equal(body.aliases.shaq, "Shaquille O'Neal");
+  }));

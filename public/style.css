@@ -86,3 +86,8 @@ pre.share{margin:0;background:var(--paper);border:1px dashed var(--line);border-
 .lb .empty{padding:14px 16px;color:var(--muted);margin:0}
 .err{color:var(--flag);font-size:14px;margin:0}
 [hidden]{display:none!important}
+.combo{position:relative;flex:1 1 220px;min-width:0;display:flex}
+.combo input[type=text]{flex:1;width:100%}
+#suggest{position:absolute;z-index:5;top:calc(100% + 4px);left:0;right:0;margin:0;padding:4px;list-style:none;background:var(--card);border:1.5px solid var(--line);border-radius:10px;box-shadow:0 8px 24px rgb(0 0 0 / .14);max-height:min(320px,50vh);overflow-y:auto}
+#suggest li{padding:9px 10px;border-radius:7px;cursor:pointer;font-size:15px}
+#suggest li:hover,#suggest li[aria-selected="true"]{background:var(--green-soft)}

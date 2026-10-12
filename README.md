@@ -9,6 +9,7 @@ Example: the pin is No. 69 on the scoring list. You answer LeBron James, who is 
 - Each round uses five of the six lists, with a pin somewhere in the top 100.
 - A player outside the top 250 of that list counts as No. 251.
 - Tied players share a rank.
+- As you type, a dropdown suggests players from all six lists (not only the current one, so it gives nothing away). You can also type a name and submit it.
 - Names are matched loosely: accents, small typos, unique last names and common nicknames (Shaq, KD, The Dream) all work. When a name could mean more than one player, the game asks which one.
 
 ## Data
@@ -28,6 +29,7 @@ Example: the pin is No. 69 on the scoring list. You answer LeBron James, who is 
 | `GET` | `/api/rounds/:id` | Current state of a round |
 | `POST` | `/api/rounds/:id/guess` | `{ name, confirm? }`. Returns `pick` with close matches, `unknown`, or `scored` |
 | `POST` | `/api/rounds/:id/submit` | `{ player }`. Post a finished round to the leaderboard |
+| `GET` | `/api/players` | Every player on any list, plus nicknames, for the name dropdown |
 | `GET` | `/api/leaderboard` | Lowest rounds, `?limit=` up to 50 |
 | `GET` | `/healthz` | Health check |
 

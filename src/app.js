@@ -1,7 +1,7 @@
 const path = require("node:path");
 const express = require("express");
 const { STATS, SOURCE, SNAPSHOT } = require("./data");
-const { resolve, isKnownPlayer } = require("./match");
+const { resolve, isKnownPlayer, PLAYER_NAMES, ALIAS } = require("./match");
 const { createRound, playHole, publicRound, OFF_LIST_RANK } = require("./game");
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -24,6 +24,11 @@ function createApp(store) {
   app.get("/healthz", (req, res) => res.json({ ok: true, store: store.kind }));
 
   app.get("/api/meta", (req, res) => res.json({ stats: STATS, source: SOURCE, snapshot: SNAPSHOT, offListRank: OFF_LIST_RANK }));
+
+  app.get("/api/players", (req, res) => {
+    res.set("Cache-Control", "public, max-age=3600");
+    res.json({ players: PLAYER_NAMES, aliases: ALIAS });
+  });
 
   app.post("/api/rounds", async (req, res) => {
     const round = createRound();

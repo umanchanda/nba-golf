@@ -103,4 +103,8 @@ function resolve(input, stat) {
   return { none: true };
 }
 
-module.exports = { norm, lev, resolve, findOnList, isKnownPlayer };
+// Every player on any of the six lists, for the name dropdown. Drawing from all
+// lists keeps the dropdown from hinting at who is on the current one.
+const PLAYER_NAMES = [...PLAYERS.values()].sort((a, b) => a.localeCompare(b));
+
+module.exports = { norm, lev, resolve, findOnList, isKnownPlayer, PLAYER_NAMES, ALIAS };

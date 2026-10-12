@@ -42,8 +42,9 @@ function pgStore(databaseUrl) {
   const { Pool } = require("pg");
   const pool = new Pool({
     connectionString: databaseUrl,
-    // Heroku Postgres requires SSL with a certificate Node does not trust by default.
-    ssl: /localhost|127\.0\.0\.1/.test(databaseUrl) ? false : { rejectUnauthorized: false },
+    // Neon requires SSL and serves a publicly trusted certificate, so verify it.
+    // A local Postgres for development and tests usually has no SSL.
+    ssl: /@(localhost|127\.0\.0\.1)[:/]/.test(databaseUrl) ? false : { rejectUnauthorized: true },
   });
   return {
     kind: "postgres",

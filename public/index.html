@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NBA Golf</title>
+<meta name="description" content="Name the player at a spot on an NBA all-time career leaderboard. Every place you miss by is a stroke.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>NBA <span>Golf</span></h1>
+      <p class="tag">Name the player at that spot on the all-time list. Every place you miss by is a stroke.</p>
+    </div>
+    <div class="holeno" id="holeno">Hole<b>1/5</b></div>
+  </header>
+
+  <section class="tee" id="tee" aria-live="polite"><p class="pending">Teeing up…</p></section>
+
+  <section class="card">
+    <h2><span>Scorecard</span><span id="best"></span></h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Hole</th><th>List</th><th class="num">Pin</th><th>Your guess</th><th class="num c-rank">Their #</th><th class="num">Strokes</th></tr></thead>
+      <tbody id="rows"></tbody>
+      <tfoot><tr><td colspan="4">Total</td><td class="c-rank"></td><td class="num" id="total">0</td></tr></tfoot>
+    </table></div>
+  </section>
+
+  <section class="card lb">
+    <h2><span>Leaderboard</span><span>Lowest rounds</span></h2>
+    <div id="leaders"><p class="empty">Loading…</p></div>
+  </section>
+
+  <div class="rules">
+    <p><b>Scoring.</b> Strokes are the distance between the pin and where your player ranks on that list. Name someone outside the top 250 on that list and they count as No. 251. Lowest total after five holes wins.</p>
+    <p><b>Data.</b> Career leaders (NBA and ABA combined) from <a href="https://www.basketball-reference.com/leaders/" target="_blank" rel="noopener">Basketball Reference</a>, snapshot taken <span id="snap">Oct 12, 2026</span>. Field goal percentage uses Basketball Reference's minimum-makes qualifier. Tied players share a rank.</p>
+  </div>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

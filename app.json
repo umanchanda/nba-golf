@@ -1,0 +1,17 @@
+{
+  "name": "NBA Golf",
+  "description": "NBA trivia scored like golf: name the player at a spot on an all-time career leaderboard.",
+  "keywords": ["node", "express", "nba", "trivia"],
+  "env": {
+    "NODE_ENV": { "value": "production" }
+  },
+  "formation": {
+    "web": { "quantity": 1, "size": "basic" }
+  },
+  "addons": [
+    { "plan": "heroku-postgresql:essential-0" }
+  ],
+  "buildpacks": [
+    { "url": "heroku/nodejs" }
+  ]
+}

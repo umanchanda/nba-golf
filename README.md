@@ -19,7 +19,7 @@ Example: the pin is No. 69 on the scoring list. You answer LeBron James, who is 
 ## How it works
 
 - `src/app.js` is an Express API. Rounds are created and scored on the server, so pins for later holes and answers for unplayed holes never reach the browser.
-- `src/store.js` keeps rounds and the leaderboard in Postgres when `DATABASE_URL` is set (tables are created on startup), and in memory otherwise.
+- `src/store.js` keeps rounds and the leaderboard in Postgres ([Neon](https://neon.tech)) when `DATABASE_URL` is set, and in memory otherwise. Tables are created on startup. Connections to anything other than localhost use SSL with certificate verification.
 - `public/` is the game page, served as static files.
 
 | Method | Path | What it does |
@@ -39,15 +39,19 @@ npm start            # http://localhost:3000, in-memory store
 npm test             # add TEST_DATABASE_URL=postgres://... to also test against Postgres
 ```
 
+## Database (Neon)
+
+The app uses a Neon Postgres database. Copy the project's pooled connection string from the Neon console (**Connect**) and set it as `DATABASE_URL`. The tables are created the first time the app starts.
+
 ## Deploy to Heroku
 
 With the Heroku CLI:
 
 ```sh
 heroku create nba-golf
-heroku addons:create heroku-postgresql:essential-0
+heroku config:set DATABASE_URL='postgresql://...neon.tech/nba_golf?sslmode=require'
 git push heroku main
 heroku open
 ```
 
-Or from the dashboard: create an app, add the Heroku Postgres add-on, then under **Deploy** connect this GitHub repo and deploy the `main` branch (optionally turn on automatic deploys). `Procfile` and `app.json` are already set up, and the app reads Heroku's `PORT` and `DATABASE_URL`.
+Or from the dashboard: create an app, add `DATABASE_URL` under **Settings → Config Vars**, then under **Deploy** connect this GitHub repo and deploy the `main` branch (optionally turn on automatic deploys). `Procfile` and `app.json` are already set up, and the app reads Heroku's `PORT`.
